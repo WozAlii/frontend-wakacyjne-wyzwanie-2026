@@ -1,46 +1,39 @@
-import {useState} from "react";
+import { useState } from "react";
 import Button from "./Button";
-interface Technology{
-    id: string;
-    name: string;
+interface Technology {
+  id: string;
+  name: string;
 }
 
-interface ProjectCardProps{
-    title: string;
-    description: string;
-    technologies: Technology[];
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  technologies: Technology[];
 }
 
+function ProjectCard({ title, description, technologies }: ProjectCardProps) {
+  const [stage, setStage] = useState("W trakcie");
 
-
-
-
-function ProjectCard({title, description, technologies}: ProjectCardProps){
-
-
-   const [stage, setStage] = useState("W trakcie");
-
-function handleCLick(){
+  function handleCLick() {
     setStage(stage == "W trakcie" ? "Ukończony" : "W trakcie");
+  }
 
-}
-
-    return(
+  return (
     <div>
-        <h1>{title}</h1>
-        <p>{description}</p>
+      <h1>{title}</h1>
+      <p>{description}</p>
 
-        {technologies.map((technology)=> (
-            <p key = {technology.id}>{technology.name}</p>
-        ))}
+      {technologies.map((technology) => (
+        <p key={technology.id}>{technology.name}</p>
+      ))}
 
+      <p>Status: {stage}</p>
 
-        <p>Status: {stage}</p>
-        
-        <Button colorScheme="orange" size="md" onClick = {handleCLick}>zmień stan projektu</Button>
+      <Button colorScheme="orange" size="md" onClick={handleCLick}>
+        zmień stan projektu
+      </Button>
     </div>
-    );
+  );
 }
 
 export default ProjectCard;
-
